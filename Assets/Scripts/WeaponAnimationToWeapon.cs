@@ -25,4 +25,9 @@ public class WeaponAnimationToWeapon : MonoBehaviour
     {
         weapon.AnimationStopMovementTrigger();
     }
+
+    void AnimationActionTrigger()
+    {
+        weapon.AnimationActionTrigger();
+    }
 }
