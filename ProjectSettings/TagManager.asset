@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Platform
+  - Enemy
+  - Head
+  - Torso
+  - Feet
+  - Sword
+  - Row
+  - LifeUI
+  - balanceFragment
+  - deathFragment
+  - vigourFragment
+  - gold
+  - healthPickup
+  - KillArea
+  - AbilitySocket
+  - Ability
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Ground
+  - Player
+  - Background
+  - Enemies
+  - Interactables
+  - Wall
+  - PostProcessing
+  - Foreground
+  - Hidden
+  - Dead
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Water
+    uniqueID: 4150215391
+    locked: 0
+  - name: Background
+    uniqueID: 2652039861
+    locked: 0
+  - name: Platforms
+    uniqueID: 2611631871
+    locked: 0
+  - name: Enemies
+    uniqueID: 3279380953
+    locked: 0
+  - name: Interactables
+    uniqueID: 1144814017
+    locked: 0
+  - name: Player
+    uniqueID: 250611945
+    locked: 0
+  - name: Hidden
+    uniqueID: 3797921505
+    locked: 0
+  - name: Foreground
+    uniqueID: 578496207
+    locked: 0
