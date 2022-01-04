@@ -5,6 +5,7 @@ using UnityEngine;
 public class Movement : CoreComponent
 {
     public Rigidbody2D RB { get; private set; }
+    public int FacingDirection { get; private set; }
     public Vector2 CurrentVelocity { get; private set; }
 
     Vector2 velocityWorkspace;
@@ -14,6 +15,16 @@ public class Movement : CoreComponent
         base.Awake();
 
         RB = GetComponentInParent<Rigidbody2D>();
+    }
+
+    void Start()
+    {
+        FacingDirection = 1;
+    }
+
+    public void LogicUpdate()
+    {
+        CurrentVelocity = RB.velocity;
     }
 
     #region Set functions
@@ -50,6 +61,20 @@ public class Movement : CoreComponent
         velocityWorkspace.Set(angle.x * velocity * direction, angle.y * velocity);
         RB.velocity = velocityWorkspace;
         CurrentVelocity = velocityWorkspace;
+    }
+
+    public void CheckIfShouldFlip(int xInput)
+    {
+        if (xInput != 0 && xInput != FacingDirection)
+        {
+            Flip();
+        }
+    }
+
+    void Flip()
+    {
+        FacingDirection *= -1;
+        RB.transform.Rotate(0, 180f, 0);
     }
     #endregion
 }

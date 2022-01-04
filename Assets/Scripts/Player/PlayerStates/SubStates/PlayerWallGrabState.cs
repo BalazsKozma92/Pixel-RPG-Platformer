@@ -29,6 +29,7 @@ public class PlayerWallGrabState : PlayerTouchingWallState
     {
         base.Enter();
 
+        player.DashState.ResetCanDash();
         holdPosition = player.transform.position;
 
         HoldPosition();
