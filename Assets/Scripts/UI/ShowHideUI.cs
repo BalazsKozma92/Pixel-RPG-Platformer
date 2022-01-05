@@ -9,10 +9,12 @@ public class ShowHideUI : MonoBehaviour
     [SerializeField] float duration;
 
     CanvasGroup canvasGroup;
+    PlayerInputHandler playerInputHandler;
     Tween fadeTween;
 
     private void Awake() {
         canvasGroup = GetComponent<CanvasGroup>();
+        playerInputHandler = FindObjectOfType<PlayerInputHandler>();
     }
 
     void Update()
@@ -21,13 +23,13 @@ public class ShowHideUI : MonoBehaviour
         {
             if (canvasGroup.alpha == 0)
             {
-                // PlayerBase.Instance.Freeze(true);
+                playerInputHandler.FreezePlayer(true);
                 AudioPlayer.Instance.PlayUIOpen();
                 FadeIn(duration);
             }
             else if (canvasGroup.alpha == 1)
             {
-                // PlayerBase.Instance.Freeze(false);
+                playerInputHandler.FreezePlayer(false);
                 AudioPlayer.Instance.PlayUIClose();
                 FadeOut(duration);
             }

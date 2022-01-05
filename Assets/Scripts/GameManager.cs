@@ -30,7 +30,8 @@ public class GameManager : MonoBehaviour
 
     int slimeKillCount;
 
-    PlayerCombat playerAttack;
+    Player currentPlayer;
+    Combat playerCombat;
 
     private static GameManager instance;
 
@@ -50,13 +51,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        playerAttack = FindObjectOfType<PlayerCombat>();
+        currentPlayer = FindObjectOfType<Player>();
+        playerCombat = currentPlayer.GetComponentInChildren<Combat>();
     }
 
     private void Start()
     {
-        // maxHealthValText.text = "<color=red>" + PlayerBase.Instance.maxHealth.ToString() + "</color> (<color=#B3A91C>+" + GemBuffManager.Instance.GetBonusVigourHealth().ToString() + " vigour</color> <color=#D52EF6>-" + GemBuffManager.Instance.GetDamageFromDeath().ToString() + " death</color>)";
-        // currentHealthValText.text = "<color=red>" + PlayerBase.Instance.maxHealth.ToString() + "</color>";
+        maxHealthValText.text = "<color=red>" + playerCombat.maxHealth.ToString() + "</color> (<color=#B3A91C>+" + GemBuffManager.Instance.GetBonusVigourHealth().ToString() + " vigour</color> <color=#D52EF6>-" + GemBuffManager.Instance.GetDamageFromDeath().ToString() + " death</color>)";
+        currentHealthValText.text = "<color=red>" + playerCombat.maxHealth.ToString() + "</color>";
         // attackDamageValText.text = "<color=orange>" + playerAttack.GetAttackDamage().ToString() + "</color> (<color=#B3A91C>+" + GemBuffManager.Instance.GetBonusVigourAttackDamage().ToString() + " vigour</color> <color=#D52EF6>-" + GemBuffManager.Instance.GetBonusDeathAttackDamage().ToString() + " death</color>)";
         // magicDamageValText.text = "<color=#6E8DE1>" + playerAttack.GetMagicDamage().ToString() + "</color>";
         goldValText.text = "<color=yellow>0</color>";

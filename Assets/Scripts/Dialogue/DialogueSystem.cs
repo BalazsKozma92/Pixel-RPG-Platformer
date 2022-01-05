@@ -63,6 +63,7 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] private Animator animator;
 
     QuestItems questItems;
+    PlayerInputHandler playerInputHandler;
     private bool alreadyBought = false;
     private bool rewarded = false;
     private bool isQuestGiven = false;
@@ -81,6 +82,7 @@ public class DialogueSystem : MonoBehaviour
 
     private void Awake() {
         questItems = FindObjectOfType<QuestItems>();
+        playerInputHandler = FindObjectOfType<PlayerInputHandler>();
     }
 
     private void Update() {
@@ -93,7 +95,7 @@ public class DialogueSystem : MonoBehaviour
                 AudioPlayer.Instance.PlayUIOpen();
             }
             npcName.text = characterName;
-            // PlayerBase.Instance.Freeze(true);
+            playerInputHandler.FreezePlayer(true);
             HandleInput();
         }
 
@@ -522,7 +524,7 @@ public class DialogueSystem : MonoBehaviour
         dialogueCanvas.GetComponent<Canvas>().enabled = false;
         closeNow = false;
         yield return new WaitForSeconds(.2f);
-        // PlayerBase.Instance.Freeze(false);
+        playerInputHandler.FreezePlayer(false);
     }
 
     private void ShowChoices(bool show)

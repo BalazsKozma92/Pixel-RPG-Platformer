@@ -565,9 +565,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxKnockbackTime: 0.2
-  deathBloodParticles: {fileID: 0}
-  deathChunkParticles: {fileID: 0}
-  bloodParticles: {fileID: 0}
+  deathBloodParticles: {fileID: 8033973585731942493, guid: d5926a29fa70d35429e9fbbd05589ea7, type: 3}
+  deathChunkParticles: {fileID: 2106756512262391224, guid: 6946be1341021ed4d912eb5e430eea57, type: 3}
+  bloodParticles: {fileID: 7276555577836050377, guid: 8950a4fd068f1cb4fa4fdc8b56bd2364, type: 3}
   maxHealth: 0
 --- !u!61 &691821482
 BoxCollider2D:

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f9364e4074e99419cc8ce65b42dea4, type: 3}
   m_Name: Hellboar_PlayerDetectedStateData
   m_EditorClassIdentifier: 
-  longRangeActionTime: 0.7
+  longRangeActionTime: 0.35

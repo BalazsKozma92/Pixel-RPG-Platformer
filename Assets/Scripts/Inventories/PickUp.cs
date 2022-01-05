@@ -76,7 +76,7 @@ public class PickUp : MonoBehaviour
                     GameManager.Instance.ChangeBalanceFragmentAmount(certainBalanceFragmentCount);
                     break;
                 case "healthPickup":
-                    // PlayerBase.Instance.SetHealth(health);
+                    other.GetComponentInChildren<Combat>().SetHealth(health);
                     break;
             }
             if (questItem != QuestItem.None)

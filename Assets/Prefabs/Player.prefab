@@ -495,10 +495,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxKnockbackTime: 0.2
-  deathBloodParticles: {fileID: 0}
-  deathChunkParticles: {fileID: 0}
-  bloodParticles: {fileID: 0}
-  maxHealth: 53
+  deathBloodParticles: {fileID: 8033973585731942493, guid: d5926a29fa70d35429e9fbbd05589ea7, type: 3}
+  deathChunkParticles: {fileID: 2106756512262391224, guid: 6946be1341021ed4d912eb5e430eea57, type: 3}
+  bloodParticles: {fileID: 7276555577836050377, guid: 8950a4fd068f1cb4fa4fdc8b56bd2364, type: 3}
+  lifeRow: {fileID: 0}
+  lifeBackGroundRow: {fileID: 0}
+  lifeBackGroundSprite: {fileID: 8341035692796046988, guid: b962e31fab4be13468ee571221c72053, type: 3}
+  lifeOrbUI: {fileID: 6241289249972622071, guid: d03e9eff57ec9594f95f33dff96dedfe, type: 3}
+  lifeOrbHalfUI: {fileID: 87972934626580408, guid: 953c4fd13839d1c4da13472125e3b82c, type: 3}
+  screenCanvas: {fileID: 0}
+  respawnCoordinates: {x: 0, y: 0}
 --- !u!61 &410146257
 BoxCollider2D:
   m_ObjectHideFlags: 0

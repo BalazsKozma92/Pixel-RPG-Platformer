@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be4e170e3e422745a283a93c981a130, type: 3}
   m_Name: FireWorm_MoveStateData
   m_EditorClassIdentifier: 
-  movementSpeed: 1
+  movementSpeed: 2

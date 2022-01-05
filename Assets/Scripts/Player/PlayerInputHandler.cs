@@ -16,6 +16,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     PlayerInput playerInput;
     Camera cam;
+    Core core;
 
     public Vector2 RawMoveInput { get; private set; }
     public Vector2 RawDashDirectionInput { get; private set; }
@@ -31,10 +32,13 @@ public class PlayerInputHandler : MonoBehaviour
     float jumpInputStartTime;
     float dashpInputStartTime;
 
+    bool playerFrozen;
+
     void Awake()
     {
         cam = Camera.main;
         playerInput = GetComponent<PlayerInput>();
+        core = GetComponentInChildren<Core>();
     }
 
     void Start()
@@ -67,89 +71,124 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnMoveInput(InputAction.CallbackContext context)
     {
-        RawMoveInput = context.ReadValue<Vector2>();
+        if (!playerFrozen)
+        {
+            RawMoveInput = context.ReadValue<Vector2>();
 
-        NormInputX = Mathf.RoundToInt(RawMoveInput.x);
-        NormInputY = Mathf.RoundToInt(RawMoveInput.y);
+            NormInputX = Mathf.RoundToInt(RawMoveInput.x);
+            NormInputY = Mathf.RoundToInt(RawMoveInput.y);
+        }
     }
 
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (!playerFrozen)
         {
-            JumpInput = true;
-            JumpInputStop = false;
-            jumpInputStartTime = Time.time;
-        }
+            if (context.started)
+            {
+                JumpInput = true;
+                JumpInputStop = false;
+                jumpInputStartTime = Time.time;
+            }
 
-        if (context.canceled)
-        {
-            JumpInputStop = true;
+            if (context.canceled)
+            {
+                JumpInputStop = true;
+            }
         }
     }
 
     public void OnDashInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (!playerFrozen)
         {
-            DashInput = true;
-            DashInputStop = false;
-            dashpInputStartTime = Time.time;
-        }
+            if (context.started)
+            {
+                DashInput = true;
+                DashInputStop = false;
+                dashpInputStartTime = Time.time;
+            }
 
-        if (context.canceled)
-        {
-            DashInputStop = true;
+            if (context.canceled)
+            {
+                DashInputStop = true;
+            }
         }
     }
 
     public void OnDashDirectionInput(InputAction.CallbackContext context)
     {
-        RawDashDirectionInput = context.ReadValue<Vector2>();
-
-        if (playerInput.currentControlScheme == "Keyboard&Mouse" || playerInput.currentControlScheme == "Keyboard")
+        if (!playerFrozen)
         {
-            RawDashDirectionInput = cam.ScreenToWorldPoint((Vector3)RawDashDirectionInput) - transform.position;
+            RawDashDirectionInput = context.ReadValue<Vector2>();
+
+            if (playerInput.currentControlScheme == "Keyboard&Mouse" || playerInput.currentControlScheme == "Keyboard")
+            {
+                RawDashDirectionInput = cam.ScreenToWorldPoint((Vector3)RawDashDirectionInput) - transform.position;
+            }
         }
     }
 
     public void OnGrabInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (!playerFrozen)
         {
-            GrabInput = true;
-        }
+            if (context.started)
+            {
+                GrabInput = true;
+            }
 
-        if (context.canceled)
-        {
-            GrabInput = false;
+            if (context.canceled)
+            {
+                GrabInput = false;
+            }
         }
     }
 
     public void OnPrimaryAttackInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (!playerFrozen)
         {
-            AttackInputs[(int)CombatInputs.primary] = true;
-        }
+            if (context.started)
+            {
+                AttackInputs[(int)CombatInputs.primary] = true;
+            }
 
-        if (context.canceled)
-        {
-            AttackInputs[(int)CombatInputs.primary] = false;
+            if (context.canceled)
+            {
+                AttackInputs[(int)CombatInputs.primary] = false;
+            }
         }
     }
 
     public void OnSecondaryAttackInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (!playerFrozen)
         {
-            AttackInputs[(int)CombatInputs.secondary] = true;
-        }
+            if (context.started)
+            {
+                AttackInputs[(int)CombatInputs.secondary] = true;
+            }
 
-        if (context.canceled)
-        {
-            AttackInputs[(int)CombatInputs.secondary] = false;
+            if (context.canceled)
+            {
+                AttackInputs[(int)CombatInputs.secondary] = false;
+            }
         }
+    }
+
+    public void FreezePlayer(bool freeze)
+    {
+        if (freeze)
+        {
+            core.Movement.SetVelocityZero();
+        }
+        playerFrozen = freeze;
+    }
+
+    public bool Frozen()
+    {
+        return playerFrozen;
     }
 
     public void UseJumpInput() => JumpInput = false;

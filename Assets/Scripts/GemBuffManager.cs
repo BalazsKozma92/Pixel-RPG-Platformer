@@ -13,7 +13,8 @@ public class GemBuffManager : MonoBehaviour
 
     Animator animator;
     CameraShake cameraShake;
-    PlayerCombat playerAttack;
+    PlayerInputHandler playerInputHandler;
+    Combat playerCombat;
     Sprite imageToPutBack;
 
     // AbilityMana
@@ -44,18 +45,20 @@ public class GemBuffManager : MonoBehaviour
     {
         cameraShake = FindObjectOfType<CameraShake>();
         animator = GetComponent<Animator>();
-        playerAttack = FindObjectOfType<PlayerCombat>();
+        playerInputHandler = FindObjectOfType<PlayerInputHandler>();
+        playerCombat = playerInputHandler.GetComponentInChildren<Combat>();
     }
 
     private void Start()
     {
-        // PlayerBase.Instance.GetComponent<PlayerAttack>().OnProccingCDReset += ResetTypeCD;
+        // playerAttack.OnProccingCDReset += ResetTypeCD;
     }
 
 //////////////////////////////////////////////////////GEM FUNCTIONS/////////////////////////////////////////////
 
     public void SetJumpStrength(float strength)
     {
+        
         // PlayerBase.Instance.SetJumpPower(strength);
     }
 
@@ -102,12 +105,12 @@ public class GemBuffManager : MonoBehaviour
     }
 
     public void SetMaxHealth(float value) {
-        // PlayerBase.Instance.SetMaxHealth(value);
+        playerCombat.SetMaxHealth(value);
     }
 
     public IEnumerator RegenerateOverTime(float amount, float overTime) {
         while (true) {
-            // PlayerBase.Instance.SetHealth(amount);
+            playerCombat.SetHealth(amount);
             yield return new WaitForSeconds(overTime);
         }
     }
@@ -137,7 +140,7 @@ public class GemBuffManager : MonoBehaviour
 
     public void AddChanceToCDReset(float percentage, string gemType)
     {
-        // PlayerBase.Instance.GetComponent<PlayerAttack>().SetChanceToResetCD(percentage, gemType);
+        // playerAttack.SetChanceToResetCD(percentage, gemType);
     }
 
     public string GetRespawnOnDeath()
