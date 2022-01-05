@@ -26,9 +26,15 @@ public class FireWorm : Entity
     [SerializeField] Data_RangedAttackState rangedAttackStateData;
     [SerializeField] Transform rangedAttackPosition;
 
+    public override void Awake()
+    {
+        base.Awake();
+    }
+
     public override void Start()
     {
         base.Start();
+
 
         idleState = new FireWorm_IdleState(this, stateMachine, "idle", idleStateData, this);
         moveState = new FireWorm_MoveState(this, stateMachine, "move", moveStateData, this);
@@ -39,32 +45,31 @@ public class FireWorm : Entity
         deadState = new FireWorm_DeadState(this, stateMachine, "dead", deadStateData, this);
         dodgeState = new FireWorm_DodgeState(this, stateMachine, "dodge", dodgeStateData, this);
         rangedAttackState = new FireWorm_RangedAttackState(this, stateMachine, "rangedAttack", rangedAttackPosition, rangedAttackStateData, this);
-
         stateMachine.Initialize(moveState);
     }
 
-    public override void Damage(AttackDetails attackDetails)
-    {
-        base.Damage(attackDetails);
+    // public override void Damage(AttackDetails attackDetails)
+    // {
+    //     base.Damage(attackDetails);
 
-        if (isDead)
-        {
-            stateMachine.ChangeState(deadState);
-        }
-        else if (isStunned && stateMachine.currentState != stunState)
-        {
-            stateMachine.ChangeState(stunState);
-        }
-        else if (CheckPlayerInMinAggroRange())
-        {
-            stateMachine.ChangeState(rangedAttackState);
-        }
-        else if (!CheckPlayerInMinAggroRange() && !isStunned)
-        {
-            lookForPlayerState.SetTurnImmediately(true);
-            stateMachine.ChangeState(lookForPlayerState);
-        }
-    }
+    //     if (isDead)
+    //     {
+    //         stateMachine.ChangeState(deadState);
+    //     }
+    //     else if (isStunned && stateMachine.currentState != stunState)
+    //     {
+    //         stateMachine.ChangeState(stunState);
+    //     }
+    //     else if (CheckPlayerInMinAggroRange())
+    //     {
+    //         stateMachine.ChangeState(rangedAttackState);
+    //     }
+    //     else if (!CheckPlayerInMinAggroRange() && !isStunned)
+    //     {
+    //         lookForPlayerState.SetTurnImmediately(true);
+    //         stateMachine.ChangeState(lookForPlayerState);
+    //     }
+    // }
 
     public override void OnDrawGizmos()
     {

@@ -7,7 +7,7 @@ public class AggressiveWeaponData : WeaponData
 {
     [SerializeField] WeaponAttackDetails[] attackDetails;
 
-    public WeaponAttackDetails[] AttackDetails { get => attackDetails; set => attackDetails = value; }
+    public WeaponAttackDetails[] AttackDetails { get => attackDetails; private set => attackDetails = value; }
 
     void OnEnable()
     {

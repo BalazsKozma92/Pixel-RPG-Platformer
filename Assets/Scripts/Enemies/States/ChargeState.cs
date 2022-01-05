@@ -24,8 +24,8 @@ public class ChargeState : State
 
         isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
         performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
-        ledgeDetected = entity.CheckLedge();
-        wallDetected = entity.CheckWall();
+        ledgeDetected = core.CollisionSenses.LedgeVertical;
+        wallDetected = core.CollisionSenses.WallFront;
     }
 
     public override void Enter()
@@ -34,7 +34,7 @@ public class ChargeState : State
 
         performCloseRangeAction = false;
         isChargeTimeOver = false;
-        entity.SetVelocity(stateData.chargeSpeed);
+        core.Movement.SetVelocityX(stateData.chargeSpeed * core.Movement.FacingDirection);
     }
 
     public override void Exit()
@@ -45,6 +45,8 @@ public class ChargeState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        core.Movement.SetVelocityX(stateData.chargeSpeed * core.Movement.FacingDirection);
 
         if (Time.time >= startTime + stateData.chargeTime)
         {

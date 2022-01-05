@@ -6,6 +6,7 @@ public class Movement : CoreComponent
 {
     public Rigidbody2D RB { get; private set; }
     public int FacingDirection { get; private set; }
+    public bool CanSetVelocity { get; set; }
     public Vector2 CurrentVelocity { get; private set; }
 
     Vector2 velocityWorkspace;
@@ -20,6 +21,7 @@ public class Movement : CoreComponent
     void Start()
     {
         FacingDirection = 1;
+        CanSetVelocity = true;
     }
 
     public void LogicUpdate()
@@ -30,37 +32,42 @@ public class Movement : CoreComponent
     #region Set functions
     public void SetVelocityZero()
     {
-        RB.velocity = Vector2.zero;
-        CurrentVelocity = Vector2.zero;
+        velocityWorkspace = Vector2.zero;
+        SetFinalVelocity();
     }
 
     public void SetVelocityX(float velocityX)
     {
         velocityWorkspace.Set(velocityX, CurrentVelocity.y);
-        RB.velocity = velocityWorkspace;
-        CurrentVelocity = velocityWorkspace;
+        SetFinalVelocity();
     }
 
     public void SetVelocity(float velocity, Vector2 direction)
     {
         velocityWorkspace = direction * velocity;
-        RB.velocity = velocityWorkspace;
-        CurrentVelocity = velocityWorkspace;
+        SetFinalVelocity();
     }
 
     public void SetVelocityY(float velocityY)
     {
         velocityWorkspace.Set(CurrentVelocity.x, velocityY);
-        RB.velocity = velocityWorkspace;
-        CurrentVelocity = velocityWorkspace;
+        SetFinalVelocity();
     }
 
     public void SetVelocity(float velocity, Vector2 angle, int direction)
     {
         angle.Normalize();
         velocityWorkspace.Set(angle.x * velocity * direction, angle.y * velocity);
-        RB.velocity = velocityWorkspace;
-        CurrentVelocity = velocityWorkspace;
+        SetFinalVelocity();
+    }
+
+    void SetFinalVelocity()
+    {
+        if (CanSetVelocity)
+        {
+            RB.velocity = velocityWorkspace;
+            CurrentVelocity = velocityWorkspace;
+        }
     }
 
     public void CheckIfShouldFlip(int xInput)
@@ -71,7 +78,7 @@ public class Movement : CoreComponent
         }
     }
 
-    void Flip()
+    public void Flip()
     {
         FacingDirection *= -1;
         RB.transform.Rotate(0, 180f, 0);

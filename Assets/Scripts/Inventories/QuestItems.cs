@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum QuestItem
-{
+{ 
     None,
     Village1CastleKeyDropped,
     Village1CastleKey,

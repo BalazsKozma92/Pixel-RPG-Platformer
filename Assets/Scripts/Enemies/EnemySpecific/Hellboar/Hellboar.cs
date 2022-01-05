@@ -23,10 +23,15 @@ public class Hellboar : Entity
     [SerializeField] Data_StunState stunStateData;
     [SerializeField] Data_DeadState deadStateData;
 
+    public override void Awake()
+    {
+        base.Awake();
+
+    }
+
     public override void Start()
     {
         base.Start();
-
         moveState = new Hellboar_MoveState(this, stateMachine, "move", moveStateData, this);
         idleState = new Hellboar_IdleState(this, stateMachine, "idle", idleStateData, this);
         playerDetectedState = new Hellboar_PlayerDetectedState(this, stateMachine, "playerDetected", playerDetectedStateData, this);
@@ -39,24 +44,24 @@ public class Hellboar : Entity
         stateMachine.Initialize(moveState);
     }
 
-    public override void Damage(AttackDetails attackDetails)
-    {
-        base.Damage(attackDetails);
+    // public override void Damage(AttackDetails attackDetails)
+    // {
+    //     base.Damage(attackDetails);
 
-        if (isDead)
-        {
-            stateMachine.ChangeState(deadState);
-        }
-        else if (isStunned && stateMachine.currentState != stunState)
-        {
-            stateMachine.ChangeState(stunState);
-        }
-        else if (!CheckPlayerInMinAggroRange() && !isStunned)
-        {
-            lookForPlayerState.SetTurnImmediately(true);
-            stateMachine.ChangeState(lookForPlayerState);
-        }
-    }
+    //     if (isDead)
+    //     {
+    //         stateMachine.ChangeState(deadState);
+    //     }
+    //     else if (isStunned && stateMachine.currentState != stunState)
+    //     {
+    //         stateMachine.ChangeState(stunState);
+    //     }
+    //     else if (!CheckPlayerInMinAggroRange() && !isStunned)
+    //     {
+    //         lookForPlayerState.SetTurnImmediately(true);
+    //         stateMachine.ChangeState(lookForPlayerState);
+    //     }
+    // }
 
     public override void OnDrawGizmos()
     {

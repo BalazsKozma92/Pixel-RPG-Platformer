@@ -18,7 +18,7 @@ public class PlayerCombat : MonoBehaviour
     bool gotInput;
     bool isAttacking;
     bool isFirstAttack;
-    AttackDetails attackDetails;
+    // AttackDetails attackDetails;
     float lastInputTime = Mathf.NegativeInfinity;
     Animator animator;
     PlayerStats playerStats;
@@ -65,9 +65,9 @@ public class PlayerCombat : MonoBehaviour
     {
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position, attack1Radius, damagableLayer);
 
-        attackDetails.damageAmount = attack1Damage;
-        attackDetails.position = transform.position;
-        attackDetails.stunDamageAmount = attack1StunDamage;
+        // attackDetails.damageAmount = attack1Damage;
+        // attackDetails.position = transform.position;
+        // attackDetails.stunDamageAmount = attack1StunDamage;
 
         if (detectedObjects.Length == 0)
         {
@@ -80,7 +80,7 @@ public class PlayerCombat : MonoBehaviour
 
         foreach (Collider2D collider in detectedObjects)
         {
-            collider.transform.parent.SendMessage("Damage", attackDetails);
+            // collider.transform.parent.SendMessage("Damage", attackDetails);
         }
     }
 

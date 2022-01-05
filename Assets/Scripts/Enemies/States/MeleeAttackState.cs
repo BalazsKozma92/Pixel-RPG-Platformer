@@ -6,8 +6,6 @@ public class MeleeAttackState : AttackState
 {
     Data_MeleeAttackState stateData;
 
-    protected AttackDetails attackDetails;
-
     public MeleeAttackState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, Transform attackPosition, Data_MeleeAttackState stateData) : base(entity, stateMachine, animBoolName, attackPosition)
     {
         this.stateData = stateData;
@@ -21,9 +19,6 @@ public class MeleeAttackState : AttackState
     public override void Enter()
     {
         base.Enter();
-
-        attackDetails.damageAmount = stateData.attackDamage;
-        attackDetails.position = entity.aliveObject.transform.position;
     }
 
     public override void Exit()

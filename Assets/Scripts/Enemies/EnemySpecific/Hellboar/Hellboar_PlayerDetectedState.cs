@@ -39,7 +39,7 @@ public class Hellboar_PlayerDetectedState : PlayerDetectedState
         }
         else if (!ledgeDetected)
         {
-            entity.Flip();
+            core.Movement.Flip();
             stateMachine.ChangeState(enemy.moveState);
         }
     }

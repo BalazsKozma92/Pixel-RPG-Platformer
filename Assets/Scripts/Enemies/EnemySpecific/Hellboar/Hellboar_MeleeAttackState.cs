@@ -65,8 +65,18 @@ public class Hellboar_MeleeAttackState : MeleeAttackState
 
         foreach (Collider2D collider in detectedObjects)
         {
-            collider.transform.SendMessage("Damage", attackDetails);
-            AudioPlayer.Instance.PlayHellHoundAttackHitSound();
+            IDamageable damageable = collider.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.Damage(stateData.attackDamage);
+                AudioPlayer.Instance.PlayHellHoundAttackHitSound();
+            }
+
+            IKnockbackable knockbackable = collider.GetComponent<IKnockbackable>();
+            if (knockbackable != null)
+            {
+                knockbackable.Knockback(stateData.knockbackAngle, stateData.knockbackStrength, core.Movement.FacingDirection);
+            }
         }
     }
 }

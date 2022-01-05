@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] float damageRadius;
     [SerializeField] bool shouldDestroyOnGroundHit;
 
-    AttackDetails attackDetails;
+    // AttackDetails attackDetails;
     Animator animator;
     Rigidbody2D rb;
 
@@ -43,7 +43,7 @@ public class Projectile : MonoBehaviour
     {
         if (!hasHitGround)
         {
-            attackDetails.position = transform.position;
+            // attackDetails.position = transform.position;
 
             if (isGravityOn)
             {
@@ -63,7 +63,11 @@ public class Projectile : MonoBehaviour
             if (damageHit && !hasHitPlayer)
             {
                 hasHitPlayer = true;
-                damageHit.transform.SendMessage("Damage", attackDetails);
+                IDamageable damageable = damageHit.GetComponent<IDamageable>();
+                if (damageable != null)
+                {
+                    // damageable.Damage(attackDetails.damageAmount);
+                }
                 animator.SetBool("hitSomething", true);
                 Destroy(gameObject, .5f);
             }
@@ -92,7 +96,7 @@ public class Projectile : MonoBehaviour
     {
         this.speed = speed;
         this.travelDistance = travelDistance;
-        attackDetails.damageAmount = damage;
+        // attackDetails.damageAmount = damage;
     }
 
     void OnDrawGizmos()
