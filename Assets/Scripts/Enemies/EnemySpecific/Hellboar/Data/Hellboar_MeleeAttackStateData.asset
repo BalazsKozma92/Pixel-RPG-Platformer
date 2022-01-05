@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Hellboar_MeleeAttackStateData
   m_EditorClassIdentifier: 
   attackRadius: 0.8
-  attackDamage: 1
+  attackDamage: 3
+  knockbackStrength: 8
+  knockbackAngle: {x: 1, y: 2}
   playerMask:
     serializedVersion: 2
     m_Bits: 128

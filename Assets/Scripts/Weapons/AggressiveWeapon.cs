@@ -36,12 +36,23 @@ public class AggressiveWeapon : Weapon
 
         foreach (IDamageable item in detectedDamageables.ToList())
         {
-            item.Damage(details.damageAmount);
+            PlayHitSound();
+            item.Damage(details.damageAmount, core.Movement.FacingDirection);
         }
 
         foreach (IKnockbackable item in detectedKnockbackables.ToList())
         {
             item.Knockback(details.knockbackAngle, details.knockbackStrength, core.Movement.FacingDirection);
+        }
+    }
+
+    void PlayHitSound()
+    {
+        switch (aggressiveWeaponData.AttackDetails[attackCounter].weaponTypeName)
+        {
+            case "Sword":
+                AudioPlayer.Instance.PlaySwingHitSound();
+                break;
         }
     }
 

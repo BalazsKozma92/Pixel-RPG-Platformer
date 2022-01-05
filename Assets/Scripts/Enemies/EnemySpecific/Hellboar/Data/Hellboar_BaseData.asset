@@ -15,7 +15,7 @@ MonoBehaviour:
   wallCheckDistance: 0.2
   ledgeCheckDistance: 0.9
   groundCheckRadius: 0.3
-  maxHealth: 555
+  maxHealth: 12
   hitParticles: {fileID: 7276555577836050377, guid: 8950a4fd068f1cb4fa4fdc8b56bd2364, type: 3}
   minAggroDistance: 6
   maxAggroDistance: 7.5

@@ -11,9 +11,13 @@ public class Projectile : MonoBehaviour
     [SerializeField] float damageRadius;
     [SerializeField] bool shouldDestroyOnGroundHit;
 
-    // AttackDetails attackDetails;
+    WeaponAttackDetails attackDetails;
     Animator animator;
     Rigidbody2D rb;
+    Vector2 knockbackAngle;
+    float knockbackStrength;
+
+    int direction;
 
     float speed;
     float travelDistance;
@@ -66,7 +70,12 @@ public class Projectile : MonoBehaviour
                 IDamageable damageable = damageHit.GetComponent<IDamageable>();
                 if (damageable != null)
                 {
-                    // damageable.Damage(attackDetails.damageAmount);
+                    damageable.Damage(attackDetails.damageAmount, direction);
+                }
+                IKnockbackable knockbackable = damageHit.GetComponent<IKnockbackable>();
+                if (knockbackable != null)
+                {
+                    knockbackable.Knockback(knockbackAngle, knockbackStrength, direction);
                 }
                 animator.SetBool("hitSomething", true);
                 Destroy(gameObject, .5f);
@@ -92,11 +101,14 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void FireProjectile(float speed, float travelDistance, float damage)
+    public void FireProjectile(float speed, float travelDistance, float damage, int direction, Vector2 knockbackAngle, float knockbackStrength)
     {
         this.speed = speed;
         this.travelDistance = travelDistance;
-        // attackDetails.damageAmount = damage;
+        this.direction = direction;
+        this.knockbackAngle = knockbackAngle;
+        this.knockbackStrength = knockbackStrength;
+        attackDetails.damageAmount = damage;
     }
 
     void OnDrawGizmos()

@@ -67,31 +67,36 @@ public class Entity : MonoBehaviour
         currentStunResistance = entityData.stunResistance;
     }
 
-    // public virtual void Damage(AttackDetails attackDetails)
-    // {
-    //     lastDamageTime = Time.time;
+    public bool GetIsStunned()
+    {
+        return isStunned;
+    }
 
-    //     currentHealth -= attackDetails.damageAmount;
-    //     currentStunResistance -= attackDetails.stunDamageAmount;
+    public virtual void Damage(float amount, int direction)
+    {
+        lastDamageTime = Time.time;
 
-    //     AudioPlayer.Instance.PlayBloodSound();
+        currentHealth -= amount;
+        currentStunResistance -= 1;
+
+        AudioPlayer.Instance.PlayBloodSound();
         
-    //     Instantiate(entityData.hitParticles, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360f)));
+        Instantiate(entityData.hitParticles, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360f)));
 
-    //     DamageHop(entityData.damageHopSpeed);
+        DamageHop(entityData.damageHopSpeed);
 
-    //     lastDamageDirection = attackDetails.position.x > transform.position.x ? -1 : 1; 
+        lastDamageDirection = direction < Core.Movement.FacingDirection ? -1 : 1; 
 
-    //     if (currentStunResistance <= 0)
-    //     {
-    //         isStunned = true;
-    //     }
+        if (currentStunResistance <= 0)
+        {
+            isStunned = true;
+        }
 
-    //     if (currentHealth <= 0)
-    //     {
-    //         isDead = true;
-    //     }
-    // }
+        if (currentHealth <= 0)
+        {
+            isDead = true;
+        }
+    }
 
     public virtual void DamageHop(float yVelocity)
     {

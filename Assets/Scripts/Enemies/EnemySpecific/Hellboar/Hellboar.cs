@@ -44,24 +44,29 @@ public class Hellboar : Entity
         stateMachine.Initialize(moveState);
     }
 
-    // public override void Damage(AttackDetails attackDetails)
-    // {
-    //     base.Damage(attackDetails);
+    public override void Damage(float amount, int direction)
+    {
+        base.Damage(amount, direction);
 
-    //     if (isDead)
-    //     {
-    //         stateMachine.ChangeState(deadState);
-    //     }
-    //     else if (isStunned && stateMachine.currentState != stunState)
-    //     {
-    //         stateMachine.ChangeState(stunState);
-    //     }
-    //     else if (!CheckPlayerInMinAggroRange() && !isStunned)
-    //     {
-    //         lookForPlayerState.SetTurnImmediately(true);
-    //         stateMachine.ChangeState(lookForPlayerState);
-    //     }
-    // }
+        if (isDead)
+        {
+            stateMachine.ChangeState(deadState);
+        }
+        else if (isStunned && stateMachine.currentState != stunState)
+        {
+            stateMachine.ChangeState(stunState);
+        }
+        else if (!CheckPlayerInMinAggroRange() && !isStunned)
+        {
+            lookForPlayerState.SetTurnImmediately(true);
+            stateMachine.ChangeState(lookForPlayerState);
+        }
+    }
+
+    public void Getthis()
+    {
+
+    }
 
     public override void OnDrawGizmos()
     {

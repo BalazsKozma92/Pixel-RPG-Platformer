@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: FireWorm_RangedAttackStateData
   m_EditorClassIdentifier: 
   projectile: {fileID: 2092257370897420798, guid: a094e375ecf3cde4e889140b800636d0, type: 3}
-  projectileDamage: 2
+  projectileDamage: 10
   projectileSpeed: 8
   projectileTravelDistance: 555
+  knockbackAngle: {x: 1, y: 2}
+  knockbackStrength: 8

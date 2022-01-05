@@ -68,7 +68,7 @@ public class Hellboar_MeleeAttackState : MeleeAttackState
             IDamageable damageable = collider.GetComponent<IDamageable>();
             if (damageable != null)
             {
-                damageable.Damage(stateData.attackDamage);
+                damageable.Damage(stateData.attackDamage, core.Movement.FacingDirection);
                 AudioPlayer.Instance.PlayHellHoundAttackHitSound();
             }
 

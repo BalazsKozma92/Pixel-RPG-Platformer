@@ -9,4 +9,6 @@ public class Data_RangedAttackState : ScriptableObject
     public float projectileDamage = 2f;
     public float projectileSpeed = 14f;
     public float projectileTravelDistance;
+    public Vector2 knockbackAngle = new Vector2(1, 1);
+    public float knockbackStrength = 5f;
 }

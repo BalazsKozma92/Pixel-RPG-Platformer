@@ -30,4 +30,9 @@ public class WeaponAnimationToWeapon : MonoBehaviour
     {
         weapon.AnimationActionTrigger();
     }
+
+    void PlaySwordSwingAudio()
+    {
+        AudioPlayer.Instance.PlaySwingSound();
+    }
 }
